@@ -43,7 +43,7 @@
 
 
 
-![This is an image]([https://myoctocat.com/assets/images/base-octocat.svg](https://github.com/O115sama/Rwaity/blob/main/resources/Img/logo.jpg?raw=true))
+![This is an image](https://github.com/O115sama/Rwaity/blob/main/resources/Img/logo.jpg?raw=true)
 
 
 
