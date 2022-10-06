@@ -59,7 +59,7 @@ CREATE TABLE `cart` (
 -- Table structure for table `category`
 --
 
-CREATE TABLE `category` (
+CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `name` varchar(120) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -79,7 +79,7 @@ INSERT INTO `category` (`id`, `name`) VALUES
 -- Table structure for table `contact`
 --
 
-CREATE TABLE `contact` (
+CREATE TABLE `contacts` (
   `id` int(11) NOT NULL,
   `name` varchar(120) NOT NULL,
   `communication` varchar(120) NOT NULL,
