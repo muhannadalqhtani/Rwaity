@@ -8,7 +8,7 @@
     <!-- Copyright -->
     <div class="text-center p-3" ">
     © <?php echo date('Y')?> Copyright
-    <span>Rewity</span>
+    <span>Rewity Store</span>
     </div>
     <!-- Copyright -->
 </footer>
