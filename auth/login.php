@@ -3,7 +3,7 @@
 <?php include "../db.php"?>
 <?php
 
-if (isset($_SESSION['id'])){
+if ($_SESSION['id']){
     header('location:../index.php');
 }
 
@@ -30,7 +30,7 @@ if (isset($_SESSION['id'])){
 
 <?php
 
-if (isset($_POST['email']) && isset($_POST['password'])){
+if ($_POST['email'] && $_POST['password']){
     $email = $_POST['email'] ;
     $result = $conn->query("SELECT * FROM `users` where email = '$email' limit 1");
 
