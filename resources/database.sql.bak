@@ -47,7 +47,7 @@ INSERT INTO `address` (`id`, `id_user`, `country`, `city`, `description`) VALUES
 -- Table structure for table `cart`
 --
 
-CREATE TABLE `carts` (
+CREATE TABLE `cart` (
   `id` int(10) NOT NULL,
   `id_buyer` int(10) NOT NULL,
   `id_product` int(10) NOT NULL
@@ -56,7 +56,7 @@ CREATE TABLE `carts` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
+-- Table structure for table `category`
 --
 
 CREATE TABLE `categories` (
@@ -65,10 +65,10 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `categories`
+-- Dumping data for table `category`
 --
 
-INSERT INTO `categories` (`id`, `name`) VALUES
+INSERT INTO `category` (`id`, `name`) VALUES
 (1, 'drama'),
 (2, 'action'),
 (3, 'horror');
@@ -76,7 +76,7 @@ INSERT INTO `categories` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `contacts`
+-- Table structure for table `contact`
 --
 
 CREATE TABLE `contacts` (
@@ -90,10 +90,10 @@ CREATE TABLE `contacts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `contacts`
+-- Dumping data for table `contact`
 --
 
-INSERT INTO `contacts` (`id`, `name`, `communication`, `message`, `status`, `created_at`, `updated_at`) VALUES
+INSERT INTO `contact` (`id`, `name`, `communication`, `message`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'abdullah alshehri', '0550550556', 'Hello Please help me , im forget pass', 1, '2022-09-17', '2022-09-17'),
 (2, 'sami mohmmed', '', '123456', 1, '2022-09-17', '2022-09-17'),
 (3, 'sami mohmmed', '', '124455', 1, '2022-09-17', '2022-09-17'),
@@ -212,15 +212,15 @@ ALTER TABLE `cart`
   ADD KEY `product` (`id_product`);
 
 --
--- Indexes for table `categories`
+-- Indexes for table `category`
 --
-ALTER TABLE `categories`
+ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `contacts`
+-- Indexes for table `contact`
 --
-ALTER TABLE `contacts`
+ALTER TABLE `contact`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -253,19 +253,19 @@ ALTER TABLE `users`
 ALTER TABLE `address`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT for table `carts`
+-- AUTO_INCREMENT for table `cart`
 --
-ALTER TABLE `carts`
+ALTER TABLE `cart`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `categories`
+-- AUTO_INCREMENT for table `category`
 --
-ALTER TABLE `categories`
+ALTER TABLE `category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT for table `contacts`
+-- AUTO_INCREMENT for table `contact`
 --
-ALTER TABLE `contacts`
+ALTER TABLE `contact`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `orders`
@@ -293,9 +293,9 @@ ALTER TABLE `address`
   ADD CONSTRAINT `user` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `carts`
+-- Constraints for table `cart`
 --
-ALTER TABLE `carts`
+ALTER TABLE `cart`
   ADD CONSTRAINT `buyer` FOREIGN KEY (`id_buyer`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `product` FOREIGN KEY (`id_product`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
