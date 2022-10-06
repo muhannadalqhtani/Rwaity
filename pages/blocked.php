@@ -1,7 +1,7 @@
 <?php include "../template/header.php"?>
 
 <?php
-if ($_SESSION['id']){
+if (isset($_SESSION['id'])){
     header('location:../index.php');
 }
 ?>

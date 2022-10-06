@@ -53,7 +53,7 @@ ob_start();
 
                         <!-- user -->
                         <li class="nav-item active">
-                            <a class="nav-link" href="/rewity/user">Dashboard</a>
+                            <a class="nav-link" href="/rewity/Contact.php">Contact Us</a>
                         </li>
                         <li class="nav-item active">
                             <a class="nav-link" href="/rewity/user/product.php">Product</a>
@@ -75,7 +75,7 @@ ob_start();
                     </form>
                 <?php }else{ ?>
                     <li class="nav-item active">
-                        <a class="nav-link" href="/rewity/contact.php">Contact Us</a>
+                        <a class="nav-link" href="/rewity/Contact.php">Contact Us</a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="/rewity/auth/login.php">Login</a>
