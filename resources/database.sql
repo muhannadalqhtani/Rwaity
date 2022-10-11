@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb5ubuntu0.5
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Oct 05, 2022 at 07:40 PM
--- Server version: 5.7.39-0ubuntu0.18.04.2
--- PHP Version: 7.2.24-0ubuntu0.18.04.13
+-- Host: 127.0.0.1
+-- Generation Time: Oct 11, 2022 at 11:59 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,29 +18,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `rewity`
+-- Database: `t-shirt`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `address`
---
-
-CREATE TABLE `address` (
-  `id` int(10) NOT NULL,
-  `id_user` int(10) NOT NULL,
-  `country` varchar(120) NOT NULL,
-  `city` varchar(120) NOT NULL,
-  `description` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `address`
---
-
-INSERT INTO `address` (`id`, `id_user`, `country`, `city`, `description`) VALUES
-(2, 9, 'KSA', 'Jeddah', 'rode king abdullah');
 
 -- --------------------------------------------------------
 
@@ -47,62 +27,21 @@ INSERT INTO `address` (`id`, `id_user`, `country`, `city`, `description`) VALUES
 -- Table structure for table `cart`
 --
 
-CREATE TABLE `carts` (
-  `id` int(10) NOT NULL,
-  `id_buyer` int(10) NOT NULL,
-  `id_product` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `categories`
---
-
-CREATE TABLE `categories` (
+CREATE TABLE `cart` (
   `id` int(11) NOT NULL,
-  `name` varchar(120) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `no` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `categories`
+-- Dumping data for table `cart`
 --
 
-INSERT INTO `categories` (`id`, `name`) VALUES
-(1, 'drama'),
-(2, 'action'),
-(3, 'horror');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `contacts`
---
-
-CREATE TABLE `contacts` (
-  `id` int(11) NOT NULL,
-  `name` varchar(120) NOT NULL,
-  `communication` varchar(120) NOT NULL,
-  `message` text NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '0',
-  `created_at` date NOT NULL,
-  `updated_at` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `contacts`
---
-
-INSERT INTO `contacts` (`id`, `name`, `communication`, `message`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'abdullah alshehri', '0550550556', 'Hello Please help me , im forget pass', 1, '2022-09-17', '2022-09-17'),
-(2, 'sami mohmmed', '', '123456', 1, '2022-09-17', '2022-09-17'),
-(3, 'sami mohmmed', '', '124455', 1, '2022-09-17', '2022-09-17'),
-(4, 'sami mohmmed', '', '147', 1, '2022-09-17', '2022-09-17'),
-(5, 'awad', '', 'as', 1, '2022-09-17', '2022-09-17'),
-(6, 'awad', '', 'as', 1, '2022-09-17', '2022-09-17'),
-(7, 'awwww', '055555555555', 'asas', 1, '2022-09-17', '2022-09-17'),
-(8, 'abeer', '088854542222', 'abeer\r\nasa', 1, '2022-09-17', '2022-09-17'),
-(9, 'sami mohmmed', '1122', 'ad', 1, '2022-09-19', '2022-09-19');
+INSERT INTO `cart` (`id`, `user_id`, `product_id`, `no`) VALUES
+(30, 16, 1, 7),
+(43, 16, 2, 5),
+(44, 16, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -110,23 +49,12 @@ INSERT INTO `contacts` (`id`, `name`, `communication`, `message`, `status`, `cre
 -- Table structure for table `orders`
 --
 
-
-
 CREATE TABLE `orders` (
-  `id` int(11) NOT NULL,
-  `id_buyer` int(10) NOT NULL,
-  `id_product` int(10) NOT NULL,
-  `payment` varchar(120) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '0',
-  `created_at` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`id`, `id_buyer`, `id_product`, `payment`, `status`, `created_at`) VALUES
-(26, 9, 12, 'Cash on Delivery', 1, '2022-10-05');
+  `order_id` int(11) NOT NULL,
+  `order_number` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -135,37 +63,21 @@ INSERT INTO `orders` (`id`, `id_buyer`, `id_product`, `payment`, `status`, `crea
 --
 
 CREATE TABLE `products` (
-  `id` int(10) NOT NULL,
-  `id_user` int(10) NOT NULL,
-  `subject` varchar(120) NOT NULL,
-  `author` varchar(120) NOT NULL,
-  `description` text NOT NULL,
-  `image` varchar(120) NOT NULL,
-  `id_category` int(10) NOT NULL,
-  `price` int(10) NOT NULL,
-  `status` tinyint(1) NOT NULL,
-  `sold` tinyint(1) NOT NULL,
-  `created_at` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `Product_id` int(11) NOT NULL,
+  `Product_name` varchar(255) DEFAULT NULL,
+  `poduct_desc` text NOT NULL,
+  `Price` int(11) DEFAULT NULL,
+  `Status` tinyint(4) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `id_user`, `subject`, `author`, `description`, `image`, `id_category`, `price`, `status`, `sold`, `created_at`) VALUES
-(5, 9, 'PHP', 'Sami Alshehri', 'Lorem ipsum dolor sit amet consectetur adipiscing elit scelerisque, est augue lectus fames rutrum et eleifend, placerat aliquet netus cum semper tristique venenatis. A cras varius sagittis mi nascetur potenti erat tellus, tempus felis arcu dignissim morbi pulvinar tristique pretium quisque, volutpat ridiculus parturient dictum dapibus sociis curabitur. Rhoncus cras sociosqu torq', 'c++.jpg', 2, 100, 1, 0, '2022-09-21'),
-(6, 9, 'HTML', 'Ahmed', 'Lorem ipsum dolor sit amet consectetur adipiscing elit scelerisque, est augue lectus fames rutrum et eleifend, placerat aliquet netus cum semper tristique venenatis. A cras varius sagittis mi nascetur potenti erat tellus, tempus felis arcu dignissim morbi pulvinar tristique pretium quisque, volutpat ridiculus parturient dictum dapibus sociis curabitur. Rhoncus cras sociosqu torq', 'c++.jpg', 2, 100, 1, 0, '2022-09-21'),
-(7, 9, 'css', 'fahed', 'Lorem ipsum dolor sit amet consectetur adipiscing elit scelerisque, est augue lectus fames rutrum et eleifend, placerat aliquet netus cum semper tristique venenatis. A cras varius sagittis mi nascetur potenti erat tellus, tempus felis arcu dignissim morbi pulvinar tristique pretium quisque, volutpat ridiculus parturient dictum dapibus sociis curabitur. Rhoncus cras sociosqu torq', 'c++.jpg', 2, 100, 1, 0, '2022-09-21'),
-(8, 10, 'JS', 'Fahed', 'Lorem ipsum dolor sit amet consectetur adipiscing elit scelerisque, est augue lectus fames rutrum et eleifend, placerat aliquet netus cum semper tristique venenatis. A cras varius sagittis mi nascetur potenti erat tellus, tempus felis arcu dignissim morbi pulvinar tristique pretium quisque, volutpat ridiculus parturient dictum dapibus sociis curabitur. Rhoncus cras sociosqu torq', 'c++.jpg', 2, 100, 1, 0, '2022-09-21'),
-(9, 10, 'JAVE', 'Abeer', 'Lorem ipsum dolor sit amet consectetur adipiscing elit scelerisque, est augue lectus fames rutrum et eleifend, placerat aliquet netus cum semper tristique venenatis. A cras varius sagittis mi nascetur potenti erat tellus, tempus felis arcu dignissim morbi pulvinar tristique pretium quisque, volutpat ridiculus parturient dictum dapibus sociis curabitur. Rhoncus cras sociosqu torq', 'c++.jpg', 2, 100, 1, 0, '2022-09-21'),
-(10, 10, 'C++', 'Ali', 'Lorem ipsum dolor sit amet consectetur adipiscing elit scelerisque, est augue lectus fames rutrum et eleifend, placerat aliquet netus cum semper tristique venenatis. A cras varius sagittis mi nascetur potenti erat tellus, tempus felis arcu dignissim morbi pulvinar tristique pretium quisque, volutpat ridiculus parturient dictum dapibus sociis curabitur. Rhoncus cras sociosqu torq', 'c++.jpg', 1, 100, 1, 0, '2022-09-21'),
-(11, 10, 'C#', 'mohmmed', 'Lorem ipsum dolor sit amet consectetur adipiscing elit scelerisque, est augue lectus fames rutrum et eleifend, placerat aliquet netus cum semper tristique venenatis. A cras varius sagittis mi nascetur potenti erat tellus, tempus felis arcu dignissim morbi pulvinar tristique pretium quisque, volutpat ridiculus parturient dictum dapibus sociis curabitur. Rhoncus cras sociosqu torq', 'c++.jpg', 2, 100, 1, 0, '2022-09-21'),
-(12, 10, 'CCNA', 'Ahmed', 'Lorem ipsum dolor sit amet consectetur adipiscing elit scelerisque, est augue lectus fames rutrum et eleifend, placerat aliquet netus cum semper tristique venenatis. A cras varius sagittis mi nascetur potenti erat tellus, tempus felis arcu dignissim morbi pulvinar tristique pretium quisque, volutpat ridiculus parturient dictum dapibus sociis curabitur. Rhoncus cras sociosqu torq', 'c++.jpg', 3, 100, 1, 1, '2022-09-22'),
-(13, 9, 'C#', 'salman', 'this is book good C# languag', 'c++.jpg', 2, 100, 1, 0, '2022-10-05'),
-(14, 9, '12', '5', '5212', 'c++.jpg', 1, 200, 1, 0, '2022-10-05'),
-(15, 9, '12', '5', '5212', 'c++.jpg', 1, 200, 1, 0, '2022-10-05'),
-(16, 9, 'as', 'as', 'as', 'c++.jpg', 1, 20, 1, 0, '2022-10-05'),
-(17, 9, 'as', 'as', 'as', 'c++.jpg', 1, 20, 1, 1, '2022-10-05');
+INSERT INTO `products` (`Product_id`, `Product_name`, `poduct_desc`, `Price`, `Status`) VALUES
+(1, 'تيشرت رجالي ماركة زارا', '', 100, 1),
+(2, 'تيشرت اديداس حريمي ', '', 120, 1),
+(3, 'تيشرت اطفالي مقاس 29 ', '', 85, 0);
 
 -- --------------------------------------------------------
 
@@ -174,137 +86,102 @@ INSERT INTO `products` (`id`, `id_user`, `subject`, `author`, `description`, `im
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `name` varchar(120) NOT NULL,
-  `phone` varchar(10) NOT NULL,
-  `email` varchar(120) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1',
-  `role_admin` tinyint(1) NOT NULL DEFAULT '0',
-  `password` varchar(120) NOT NULL,
-  `created` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `user_id` int(11) NOT NULL,
+  `user_name` varchar(255) NOT NULL,
+  `user_email` varchar(255) NOT NULL,
+  `user_pass` varchar(255) NOT NULL,
+  `user_phone` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `phone`, `email`, `status`, `role_admin`, `password`, `created`) VALUES
-(1, 'abdullah', '0593499178', 'a@a.com', 0, 0, '$2y$10$j.tyfMHpR9HZ0zmBBBEoW.Dx4K2AqBKbFbc4pG03GnxVSj9L8lX0G', '2022-10-1'),
-(2, 'osamah', '0580583503', 'o@o.com', 1, 1, '$2y$10$DgniHT2MeST/uK3xqP2N5OwVf1Llt9Y7TxgI.yb2F2j8wWh8O3Oya', '2022-10-1');
+INSERT INTO `users` (`user_id`, `user_name`, `user_email`, `user_pass`, `user_phone`) VALUES
+(16, 'biko', 'hogaxa@mailinator.com', '12c6fc06c99a462375eeb3f43dfd832b08ca9e17', 'Brianna Kemp'),
+(17, 'Zia Reid', 'tavyryl@mailinator.com', '2d3db698f5543259b94b98bafcfb4906570c4d2a', 'Daniel Hodges'),
+(18, 'Inez Bush', 'sogubuc@mailinator.com', 'cb1ae7fd841977a40896447649fa50915c1c3b68', 'Keelie Browning'),
+(20, 'Piper Clark', 'zoduv@mailinator.com', 'b3dd1fcfb50f617e6b765f177cbcd0e318cdd6b7', 'Tad Donovan'),
+(21, 'Brynne Buchanan', 'veqojic@mailinator.com', '8d128f7c22f5ad7f3bc5be68924acff2951139d7', 'Hamish Rodriguez');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `address`
---
-ALTER TABLE `address`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user` (`id_user`);
-
---
 -- Indexes for table `cart`
 --
 ALTER TABLE `cart`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `buyer` (`id_buyer`),
-  ADD KEY `product` (`id_product`);
-
---
--- Indexes for table `categories`
---
-ALTER TABLE `categories`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `contacts`
---
-ALTER TABLE `contacts`
-  ADD PRIMARY KEY (`id`);
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `product_id` (`product_id`);
 
 --
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`order_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `product_id` (`product_id`);
 
 --
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_user` (`id_user`),
-  ADD KEY `id_category` (`id_category`);
+  ADD PRIMARY KEY (`Product_id`);
 
 --
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `user_name` (`user_name`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `address`
+-- AUTO_INCREMENT for table `cart`
 --
-ALTER TABLE `address`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `carts`
---
-ALTER TABLE `carts`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `categories`
---
-ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `contacts`
---
-ALTER TABLE `contacts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+ALTER TABLE `cart`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `Product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `address`
+-- Constraints for table `cart`
 --
-ALTER TABLE `address`
-  ADD CONSTRAINT `user` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `cart`
+  ADD CONSTRAINT `cart_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`Product_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_products` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `carts`
+-- Constraints for table `orders`
 --
-ALTER TABLE `carts`
-  ADD CONSTRAINT `buyer` FOREIGN KEY (`id_buyer`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `product` FOREIGN KEY (`id_product`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `products`
---
-ALTER TABLE `products`
-  ADD CONSTRAINT `id_category` FOREIGN KEY (`id_category`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `id_user` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `orders`
+  ADD CONSTRAINT `users_orders` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
